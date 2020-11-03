@@ -568,7 +568,6 @@ def pilih_super():
 
                 re = requests.get('https://graph.facebook.com/' + idg + '/members?fields=name,id&limit=999999999&access_token=' + toket)
                 s = json.loads(re.text)
-                    id.append(i['id'])
 
             else:
                 if peak == '0':
