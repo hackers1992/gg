@@ -165,7 +165,7 @@ def pilih():
             informasi()
         else:
             if zedd == '2':
-            else:
+		else:
                 if zedd == '3':
                     menu_bot()
                 else:
