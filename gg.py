@@ -115,7 +115,7 @@ def login():
 		    st = open("login.txt", "w")
 		    st.write(z["access_token"])
 		    st.close()
-		    print "\n[✓] Logged In Successfully."
+		print "\n[✓] Logged In Successfully."
 		    time.sleep(1)
 		    menu()
 		else:
