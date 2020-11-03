@@ -291,7 +291,6 @@ def hack_pilih():
                 hasil()
             else:
                 if hack == '3':
-                else:
                     if hack == '4':
                         brute()
                     else:
