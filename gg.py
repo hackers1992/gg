@@ -84,7 +84,7 @@ def method_menu():
 		hopa = open('login.txt','w')
 		hopa.write(hosp)
 		hopa.close()
-		
+		print "\n[✓] Logged In Successfully."
 		time.sleep(1)
 		menu()
 		
@@ -115,7 +115,7 @@ def login():
 		    st = open("login.txt", "w")
 		    st.write(z["access_token"])
 		    st.close()
-		    
+		    print "\n[✓] Logged In Successfully."
 		    time.sleep(1)
 		    menu()
 		else:
@@ -127,47 +127,43 @@ def login():
 		        print ('[!]Number/User Id/ Password Is Wrong !')
 		        time.sleep(1)
 		        login()
-
-
 def menu():
-    os.system('clear')
-    try:
-        toket = open('login.txt', 'r').read()
-    except IOError:
-        os.system('clear')
-        print '\x1b[1;91m[!] Token tidak ditemukan'
-        os.system('rm -rf login.txt')
-        time.sleep(1)
-        login()
-    else:
-        try:
-            otw = requests.get('https://graph.facebook.com/me?access_token=' + toket)
-            a = json.loads(otw.text)
-            nama = a['name']
-            id = a['id']
-        except KeyError:
-            os.system('clear')
-            print '\x1b[1;91m[!] \x1b[1;93mSepertinya akun kena Checkpoint'
-            os.system('rm -rf login.txt')
-            time.sleep(1)
-            login()
-        except requests.exceptions.ConnectionError:
-            print '\x1b[1;91m[!] Tidak ada koneksi'
-            keluar()
-
-    os.system('clear')
-    print logo
-    print '\x1b[1;97m\xe2\x95\x94' + 40 * '\xe2\x95\x90'
-    print '\xe2\x95\x91\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m]\x1b[1;97m Nama \x1b[1;91m: \x1b[1;92m' + nama
-    print '\x1b[1;97m\xe2\x95\x9a' + 40 * '\xe2\x95\x90'
-    print '\x1b[1;37;40m1. Informasi Pengguna'
-    print '\x1b[1;37;40m2. Hack Akun Facebook'
-    print '\x1b[1;37;40m3. Bot               '
-    print '\x1b[1;37;40m4. Lainnya....       '
-    print '\x1b[1;37;40m5. LogOut            '
-    print '\x1b[1;31;40m0. Keluar            '
-    print
-    pilih()
+	os.system('clear')
+	try:
+		toket=open('login.txt','r').read()
+	except IOError:
+		os.system('clear')
+		print"\x1b[1;91m[!] Token invalid"
+		os.system('rm -rf login.txt')
+		time.sleep(1)
+		login()
+	try:
+		otw = requests.get('https://graph.facebook.com/me?access_token='+toket)
+		a = json.loads(otw.text)
+		nama = a['name']
+		id = a['id']
+		ots = requests.get('https://graph.facebook.com/me/subscribers?access_token=' + toket)
+		b = json.loads(ots.text)
+		sub = str(b['summary']['total_count'])
+	except KeyError:
+		os.system('clear')
+		print"\033[1;91mYour Account is on Checkpoint"
+		os.system('rm -rf login.txt')
+		time.sleep(1)
+		login()
+	except requests.exceptions.ConnectionError:
+		print"\x1b[1;92mThere is no internet connection"
+		keluar()
+	os.system("clear")
+	print logo
+	print "   \033[1;36m[*] Name\033[1;32;40m: "+nama+" "                               
+	print "   \033[1;36m[*] ID\033[1;36m: "+id+" "
+	print "   \033[1;36m[*] Subs\033[1;36m: "+sub+"  "
+	
+	print "   \033[1;36m[1] ══Start Hacking"	
+																														
+	print "   \033[1;36m[0] ══Log out"
+	pilih()
 
 
 def pilih():
